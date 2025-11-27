@@ -1,9 +1,8 @@
 package com.javaProject.AptitudeApp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Category {
@@ -13,4 +12,35 @@ public class Category {
 	private String cId;
 	private String cName;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Topic> topics;
+
+    public Category() {
+
+    }
+
+    public Category(String cName, List<Topic> topics) {
+        this.cName = cName;
+        this.topics = topics;
+    }
+
+    public String getcId() {
+        return cId;
+    }
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
 }
