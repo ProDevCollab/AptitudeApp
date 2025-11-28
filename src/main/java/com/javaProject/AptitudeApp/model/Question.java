@@ -10,7 +10,7 @@ public class Question {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String qId;
+	private Long qId;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
@@ -53,7 +53,7 @@ public class Question {
 
 
 
-    public String getqId() {
+    public Long getqId() {
         return qId;
     }
 

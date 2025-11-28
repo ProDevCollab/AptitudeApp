@@ -9,7 +9,7 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String cId;
+	private Long cId;
 	private String cName;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
@@ -24,7 +24,7 @@ public class Category {
         this.topics = topics;
     }
 
-    public String getcId() {
+    public Long getcId() {
         return cId;
     }
 
