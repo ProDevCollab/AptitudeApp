@@ -11,7 +11,7 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String topicId;
+    private Long topicId;
     private String topicName;
 
     @ManyToOne
@@ -34,7 +34,7 @@ public class Topic {
         this.questions = questions;
     }
 
-    public String getTopicId() {
+    public Long getTopicId() {
         return topicId;
     }
 

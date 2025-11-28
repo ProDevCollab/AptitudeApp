@@ -7,7 +7,7 @@ public class LearningResource {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String lrId;
+    private Long lrId;
     private String lrUrl;
 
     @ManyToOne
@@ -22,7 +22,7 @@ public class LearningResource {
         this.lrUrl = lrUrl;
     }
 
-    public String getLrId() {
+    public Long getLrId() {
         return lrId;
     }
 
