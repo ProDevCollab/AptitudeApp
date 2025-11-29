@@ -16,9 +16,8 @@ public class Question {
     @JoinColumn(name = "topic_id")
 	private Topic topic;
 
-	private String question; 
-	@Lob
-	private byte[] imageArr; //need to add 1 image in question
+	private String question;
+	private String imageUrl; //need to add 1 image in question
 	private String opA;
 	private String opB;
 	private String opC;
@@ -39,11 +38,11 @@ public class Question {
         this.answer = answer;
     }
 
-    public Question(Topic topic, String question, byte[] imageArr, String opA, String opB, String opC,
+    public Question(Topic topic, String question, String imageUrl, String opA, String opB, String opC,
                     String opD, String answer) {
         this.topic = topic;
         this.question = question;
-        this.imageArr = imageArr;
+        this.imageUrl = imageUrl;
         this.opA = opA;
         this.opB = opB;
         this.opC = opC;
@@ -73,12 +72,12 @@ public class Question {
         this.question = question;
     }
 
-    public byte[] getImageArr() {
-        return imageArr;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageArr(byte[] imageArr) {
-        this.imageArr = imageArr;
+    public void setImageUrl(String imageArr) {
+        this.imageUrl = imageUrl;
     }
 
     public String getOpA() {

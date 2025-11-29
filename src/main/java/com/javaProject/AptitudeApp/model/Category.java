@@ -19,9 +19,8 @@ public class Category {
 
     }
 
-    public Category(String cName, List<Topic> topics) {
+    public Category(String cName) {
         this.cName = cName;
-        this.topics = topics;
     }
 
     public Long getcId() {
