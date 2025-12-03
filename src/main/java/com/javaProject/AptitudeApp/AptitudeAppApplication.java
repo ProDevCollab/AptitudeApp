@@ -9,8 +9,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class AptitudeAppApplication {
 
 	public static void main(String[] args) {
-        ConfigurableApplicationContext container = SpringApplication.run(AptitudeAppApplication.class, args);
-        container.getBean(tempAddData.class).addData();
+        SpringApplication.run(AptitudeAppApplication.class, args);
+        //container.getBean(tempAddData.class).addData();
 	}
 
 }
