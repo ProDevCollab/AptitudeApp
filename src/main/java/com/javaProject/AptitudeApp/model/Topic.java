@@ -27,11 +27,9 @@ public class Topic {
     public Topic() {
     }
 
-    public Topic(String topicName, Category category, List<LearningResource> learningResources, List<Question> questions) {
+    public Topic(String topicName, Category category) {
         this.topicName = topicName;
         this.category = category;
-        this.learningResources = learningResources;
-        this.questions = questions;
     }
 
     public Long getTopicId() {
