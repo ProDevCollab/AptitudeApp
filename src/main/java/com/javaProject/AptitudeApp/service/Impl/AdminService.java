@@ -1,33 +1,45 @@
 package com.javaProject.AptitudeApp.service.Impl;
 
-import com.javaProject.AptitudeApp.dao.ICategoryRepo;
-import com.javaProject.AptitudeApp.dao.ILearningResourceRepo;
-import com.javaProject.AptitudeApp.dao.ITopicRepo;
+import com.javaProject.AptitudeApp.dao.*;
 import com.javaProject.AptitudeApp.dto.CategoryDto;
-import com.javaProject.AptitudeApp.model.Category;
-import com.javaProject.AptitudeApp.model.LearningResource;
-import com.javaProject.AptitudeApp.model.Topic;
+import com.javaProject.AptitudeApp.dto.TopicDto;
+import com.javaProject.AptitudeApp.model.*;
 import com.javaProject.AptitudeApp.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AdminService implements IAdminService {
-    @Autowired
+
     private ICategoryRepo categoryRepo;
-
-    @Autowired
     private ILearningResourceRepo learningResourceRepo;
+    private ITopicRepo  topicRepo;
+    private IQuestionRepo questionRepo;
 
     @Autowired
-    private ITopicRepo  topicRepo;
+    public void setCategoryRepo(ICategoryRepo categoryRepo) {
+        this.categoryRepo = categoryRepo;
+    }
+
+    @Autowired
+    public void setLearningResourceRepo(ILearningResourceRepo learningResourceRepo) {
+        this.learningResourceRepo = learningResourceRepo;
+    }
+
+    @Autowired
+    public void setTopicRepo(ITopicRepo topicRepo) {
+        this.topicRepo = topicRepo;
+    }
+
+    @Autowired
+    public void setQuestionRepo(IQuestionRepo questionRepo) {
+        this.questionRepo = questionRepo;
+    }
 
     @Override
-    public String addTopic(Long categoryId, String topicName) {
+    public String addTopic(String topicName, Long categoryId) {
         categoryRepo.findById(categoryId)
                 .ifPresentOrElse(category -> topicRepo.save(new Topic(topicName, category)),
                         () -> { throw new RuntimeException("Category not found with id: " + categoryId);});
@@ -35,7 +47,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public String addLearningResource(Long topicId, String resourceUrl) {
+    public String addLearningResource(String resourceUrl, Long topicId) {
         topicRepo.findById(topicId)
                 .ifPresentOrElse(topic -> learningResourceRepo.save(new LearningResource(topic, resourceUrl)),
                         () -> { throw new RuntimeException("Topic not found with id: " + topicId);});
@@ -43,13 +55,20 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public String addQuestion() {
+    public String addQuestion(String question, byte[] imageData, String opA, String opB, String opC, String opD, String answer, Long topicId) {
         // Implementation for adding a question
-        return null;
+        topicRepo.findById(topicId);
+
+        return "Question added successfully";
     }
 
     public List<CategoryDto> getAllCategories(){
         List<Category> categoryList = categoryRepo.findAll();
         return categoryList.stream().map(c -> new CategoryDto(c.getcId(), c.getcName())).toList();
+    }
+
+    public List<TopicDto> getAllTopics() {
+        List<Topic> topicList = topicRepo.findAll();
+        return topicList.stream().map(topic -> new TopicDto(topic.getTopicId(), topic.getTopicName())).toList();
     }
 }

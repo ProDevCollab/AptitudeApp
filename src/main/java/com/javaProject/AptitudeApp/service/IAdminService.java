@@ -2,14 +2,16 @@ package com.javaProject.AptitudeApp.service;
 
 
 import com.javaProject.AptitudeApp.dto.CategoryDto;
+import com.javaProject.AptitudeApp.dto.TopicDto;
 
 import java.util.List;
 
 public interface IAdminService {
-    String addTopic(Long categoryId, String topicName);
-    String addLearningResource(Long topicId, String resourceUrl);
-    String addQuestion();
+    String addTopic(String topicName, Long categoryId);
+    String addLearningResource(String resourceUrl, Long topicId);
+    String addQuestion(String question, byte[] imageData, String opA, String opB, String opC, String opD, String answer, Long topicId);
 
     List<CategoryDto> getAllCategories();
+    List<TopicDto> getAllTopics();
 
 }

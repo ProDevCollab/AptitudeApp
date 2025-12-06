@@ -1,6 +1,6 @@
 package com.javaProject.AptitudeApp.dto;
 
-public class LearningResourceDto {
+public class LearningResourceCreationDto {
     private Long topicId;
     private String resourceUrl;
 
