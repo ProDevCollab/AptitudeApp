@@ -9,7 +9,7 @@ import java.util.List;
 public interface IAdminService {
     String addTopic(String topicName, Long categoryId);
     String addLearningResource(String resourceUrl, Long topicId);
-    String addQuestion(String question, byte[] imageData, String opA, String opB, String opC, String opD, String answer, Long topicId);
+    String addQuestion(String question, String imageData, String opA, String opB, String opC, String opD, String answer, Long topicId);
 
     List<CategoryDto> getAllCategories();
     List<TopicDto> getAllTopics();

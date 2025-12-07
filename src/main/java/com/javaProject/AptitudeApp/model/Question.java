@@ -24,7 +24,7 @@ public class Question {
 	private String opD;
 	private String answer;
 
-    public Question() {
+    public Question() {    	
     }
 
     public Question(Topic topic, String question, String opA, String opB, String opC,

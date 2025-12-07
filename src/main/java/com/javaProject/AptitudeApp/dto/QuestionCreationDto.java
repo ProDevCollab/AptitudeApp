@@ -2,7 +2,7 @@ package com.javaProject.AptitudeApp.dto;
 
 public class QuestionCreationDto {
     private String question;
-    private byte[] imageData;
+    private String imageData; 
     private String opA;
     private String opB;
     private String opC;
@@ -10,7 +10,8 @@ public class QuestionCreationDto {
     private String answer;
     private final Long topicId;
 
-    public QuestionCreationDto(String question, byte[] imageData, String opA, String opB, String opC, String opD, String answer, Long topicId) {
+    //from frontend image is encoded to String and in backend image is coverted from String to Byte Array and then decoded back to it's original format and is stored file storage
+    public QuestionCreationDto(String question, String imageData, String opA, String opB, String opC, String opD, String answer, Long topicId) {
         this.question = question;
         this.imageData = imageData;
         this.opA = opA;
@@ -29,11 +30,11 @@ public class QuestionCreationDto {
         this.question = question;
     }
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 
