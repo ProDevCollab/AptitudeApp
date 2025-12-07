@@ -1,6 +1,5 @@
 package com.javaProject.AptitudeApp.service.Impl;
 
-import com.javaProject.AptitudeApp.configurations.Configurations;
 import com.javaProject.AptitudeApp.dao.*;
 import com.javaProject.AptitudeApp.dto.CategoryDto;
 import com.javaProject.AptitudeApp.dto.TopicDto;
@@ -24,7 +23,6 @@ public class AdminService implements IAdminService {
     private ITopicRepo  topicRepo;
     private IQuestionRepo questionRepo;
     private ISupabaseStorageService supaStorageService;
-	private LocalDateTime dateTime ;
 
     @Autowired
     public void setCategoryRepo(ICategoryRepo categoryRepo) {
@@ -50,12 +48,6 @@ public class AdminService implements IAdminService {
     public void setSupaStorageService(ISupabaseStorageService supaStorageService) {
     	this.supaStorageService = supaStorageService;
     }
-    
-    @Autowired
-    public void setDateTime(LocalDateTime currentDateTime) {
-    	this.dateTime = currentDateTime;
-    }
-    
     
     @Override
     public String addTopic(String topicName, Long categoryId) {
@@ -86,31 +78,36 @@ public class AdminService implements IAdminService {
 //    	if(imageSize > 750kb) {
 //    		throw
 //    	}
-    	
+
     	String imageUrl = null;
     	try {
-    		byte[] imageBytes = Base64.getDecoder().decode(imageData);
-    		
-            //filename = {QI}-{topicId}-{dateTime}
-    		String filename = "QI-" + topic.getTopicId() + "-" + dateTime;
-    		
-        	
-        	//call API to save image in SupaBase
-        	imageUrl = supaStorageService.uploadImage(imageBytes, filename + ".jpeg");
-        	System.out.println(imageUrl);
+            if (!imageData.isEmpty()) {
+                byte[] imageBytes = Base64.getDecoder().decode(imageData);
+
+                //filename = {QI}-{topicId}-{dateTime}
+                String filename = "QI-" + topic.getTopicId() + "-" + LocalDateTime.now();
+
+
+                //call API to save image in SupaBase
+
+                imageUrl = supaStorageService.uploadImage(imageBytes, filename + ".png");
+                System.out.println(imageUrl);
 //            System.out.println("____________________________________________");
 //            System.out.println("Decoded byte array length: " + imageBytes.length);
 //            System.out.println("____________________________________________");
-//            System.out.println("Decoded string: " + new String(imageBytes, StandardCharsets.UTF_8)); 
+//            System.out.println("Decoded string: " + new String(imageBytes, StandardCharsets.UTF_8));
+                Question ques = new Question(topic,  question,  imageUrl,  opA,  opB,  opC, opD,  answer);
+                questionRepo.save(ques);
+            } else {
+                Question ques = new Question(topic,  question,  opA,  opB,  opC, opD,  answer);
+                questionRepo.save(ques);
+            }
+            } catch(IllegalArgumentException e){
+                System.err.println("Error decoding Base64 string: " + e.getMessage());
+            }
 
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error decoding Base64 string: " + e.getMessage());
-        }  	
-    
-    	
-//    	Question ques = new Question(topic,  question,  imageUrl,  opA,  opB,  opC,
-//                 opD,  answer);
-//    	questionRepo.save(ques);
+
+
     	
     }
     

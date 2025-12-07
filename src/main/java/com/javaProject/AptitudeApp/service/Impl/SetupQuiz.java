@@ -37,7 +37,7 @@ public class SetupQuiz implements ISetupQuiz {
     private static List<Long> generateRandomIndex(Integer size) {
         Random random = new Random();
         List<Long> randomIndexes = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 5; i++) {
             Long nextIndex = random.nextLong(size);
             if(randomIndexes.stream().noneMatch(r->r!=nextIndex)){
                 randomIndexes.add(nextIndex);

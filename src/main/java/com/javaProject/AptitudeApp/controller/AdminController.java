@@ -3,46 +3,51 @@ package com.javaProject.AptitudeApp.controller;
 import com.javaProject.AptitudeApp.dto.*;
 import com.javaProject.AptitudeApp.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
 
     private IAdminService adminService;
+
 
     @Autowired
     public void setAdminService(IAdminService adminService) {
         this.adminService = adminService;
     }
 
-    @GetMapping("/admin/categories")
-    public List<CategoryDto> getCategories() {
-       return adminService.getAllCategories();
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoryDto>> getCategories() {
+       List<CategoryDto> categoryDtoList = adminService.getAllCategories();
+       return new ResponseEntity<>(categoryDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/admin/topics")
-    public List<TopicDto> getTopic() {
-        return adminService.getAllTopics();
+    @GetMapping("/topics")
+    public ResponseEntity<List<TopicDto>> getTopic() {
+        List<TopicDto> topicDtoList = adminService.getAllTopics();
+        return new ResponseEntity<>(topicDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("/admin/topic/add")
-    public String addTopic(@RequestBody TopicCreationDto topicCreationDto) {
-        return adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId());
+    @PostMapping("/topic/add")
+    public ResponseEntity<String> addTopic(@RequestBody TopicCreationDto topicCreationDto) {
+        String responseText =  adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId());
+        return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
-    @PostMapping("/admin/learning-resource/add")
-    public String addLearningResource(@RequestBody LearningResourceCreationDto learningResourceCreationDto) {
-        return adminService.addLearningResource(learningResourceCreationDto.getResourceUrl(), learningResourceCreationDto.getTopicId());
+    @PostMapping("/learning-resource/add")
+    public ResponseEntity<String> addLearningResource(@RequestBody LearningResourceCreationDto learningResourceCreationDto) {
+        String responseText = adminService.addLearningResource(learningResourceCreationDto.getResourceUrl(), learningResourceCreationDto.getTopicId());
+        return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
-    @PostMapping("/admin/question/add")
-    public String addQuestion(@RequestBody QuestionCreationDto questionCreationDto) {
-        return adminService.addQuestion(
+    @PostMapping("/question/add")
+    public ResponseEntity<String> addQuestion(@RequestBody QuestionCreationDto questionCreationDto) {
+        String responseText = adminService.addQuestion(
                 questionCreationDto.getQuestion(),
                 questionCreationDto.getImageData(),
                 questionCreationDto.getOpA(),
@@ -51,6 +56,7 @@ public class AdminController {
                 questionCreationDto.getOpD(),
                 questionCreationDto.getAnswer(),
                 questionCreationDto.getTopicId());
+        return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 }
 

@@ -13,7 +13,7 @@ public class SupabaseStorageService implements ISupabaseStorageService{
 
     private final String SUPABASE_URL = "https://bqtnndxsxgqxnzflbtay.supabase.co";
     private final String SUPABASE_BUCKET = "data-api";
-    private final String SUPABASE_API_KEY = "sb_secret_kLaivyU4JVlE2h31ibgcJA_gVfAXSRI";
+    private final String SUPABASE_API_KEY = System.getenv("SUPABASE_API_KEY");
 
     public SupabaseStorageService() {
         this.restClient = RestClient.builder()
