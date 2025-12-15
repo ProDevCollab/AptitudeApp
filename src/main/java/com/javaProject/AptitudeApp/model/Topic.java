@@ -13,6 +13,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long topicId;
     private String topicName;
+    private String slug;
 
     @ManyToOne
     @JoinColumn(name = "c_id")
@@ -27,11 +28,10 @@ public class Topic {
     public Topic() {
     }
 
-    public Topic(String topicName, Category category, List<LearningResource> learningResources, List<Question> questions) {
+    public Topic(String topicName, Category category, String slug) {
+        this.slug = slug;
         this.topicName = topicName;
         this.category = category;
-        this.learningResources = learningResources;
-        this.questions = questions;
     }
 
     public Long getTopicId() {
@@ -68,6 +68,13 @@ public class Topic {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
 
