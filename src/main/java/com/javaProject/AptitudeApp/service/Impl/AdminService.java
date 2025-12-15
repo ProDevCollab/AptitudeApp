@@ -50,9 +50,9 @@ public class AdminService implements IAdminService {
     }
     
     @Override
-    public String addTopic(String topicName, Long categoryId) {
+    public String addTopic(String topicName, Long categoryId, String slug) {
         categoryRepo.findById(categoryId)
-                .ifPresentOrElse(category -> topicRepo.save(new Topic(topicName, category)),
+                .ifPresentOrElse(category -> topicRepo.save(new Topic(topicName, category, slug)),
                         () -> { throw new RuntimeException("Category not found with id: " + categoryId);});
         return "Topic added successfully";
     }
@@ -119,6 +119,6 @@ public class AdminService implements IAdminService {
 
     public List<TopicDto> getAllTopics() {
         List<Topic> topicList = topicRepo.findAll();
-        return topicList.stream().map(topic -> new TopicDto(topic.getTopicId(), topic.getTopicName())).toList();
+        return topicList.stream().map(topic -> new TopicDto(topic.getTopicId(), topic.getTopicName(), topic.getSlug())).toList();
     }
 }

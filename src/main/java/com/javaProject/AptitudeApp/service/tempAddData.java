@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
+//@Service
 public class tempAddData {
 
-	@Autowired
+//	@Autowired
 	private ICategoryRepo categoryRepo;
 
-	@Autowired
+//	@Autowired
 	private ITopicRepo topicRepo;
 
-	@Autowired
+//	@Autowired
 	private ILearningResourceRepo lrRepo;
 
 	@Transactional
@@ -54,7 +54,7 @@ public class tempAddData {
 		List<Topic> topics = new ArrayList<>();
 
 		for (String t : quantitativeTopics) {
-			topics.add(new Topic(t, cat1));
+//			topics.add(new Topic(t, cat1)); constructor without slug
 
 		}
 		topicRepo.saveAll(topics);
@@ -62,7 +62,7 @@ public class tempAddData {
 		// Save Logical topics
 		topics = new ArrayList<>();
 		for (String t : logicalTopics) {
-			topics.add(new Topic(t, cat2));
+//			topics.add(new Topic(t, cat2)); constructor without slug
 		}
 		topicRepo.saveAll(topics);
 

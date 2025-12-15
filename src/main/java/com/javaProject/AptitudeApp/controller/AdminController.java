@@ -35,7 +35,7 @@ public class AdminController {
 
     @PostMapping("/topic/add")
     public ResponseEntity<String> addTopic(@RequestBody TopicCreationDto topicCreationDto) {
-        String responseText =  adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId());
+        String responseText =  adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId(), topicCreationDto.getSlug());
         return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
