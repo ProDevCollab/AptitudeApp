@@ -31,7 +31,7 @@ public class HomeController {
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
-    @GetMapping("/topics/{categoryId}")
+    @GetMapping("/categories/{categoryId}/topics")
     public ResponseEntity<List<TopicDto>> getTopicsByCategory(@PathVariable Long categoryId) {
         List<TopicDto> topicDto = homeService.getTopicsByCategory(categoryId);
         return new ResponseEntity<>(topicDto, HttpStatus.OK);
