@@ -59,7 +59,7 @@ public class HomeControllerTests {
 
     @Test
     public void testGetTopicsByCategoryId() throws Exception {
-        Long categoryId = 1L;
+        long categoryId = 1L;
         Mockito.when(homeService.getTopicsByCategory(categoryId))
                 .thenReturn(
                         List.of(
@@ -79,7 +79,7 @@ public class HomeControllerTests {
 
     @Test
     public void testGetTopicsByCategoryId_EmptyList() throws Exception {
-        Long categoryId = 1L;
+        long categoryId = 1L;
         Mockito.when(homeService.getTopicsByCategory(categoryId))
                 .thenReturn(List.of());
 
@@ -91,7 +91,7 @@ public class HomeControllerTests {
 
     @Test
     public void testGetTopicsByCategoryId_InvalidId() throws Exception {
-        Long categoryId = 999L;
+        long categoryId = 999L;
         Mockito.when(homeService.getTopicsByCategory(categoryId))
                 .thenThrow(new CategoryNotFoundException("Category not found with id: " + categoryId));
 
