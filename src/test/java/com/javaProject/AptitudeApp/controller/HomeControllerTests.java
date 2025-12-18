@@ -3,22 +3,24 @@ package com.javaProject.AptitudeApp.controller;
 import com.javaProject.AptitudeApp.dto.CategoryDto;
 import com.javaProject.AptitudeApp.dto.TopicDto;
 import com.javaProject.AptitudeApp.exception.CategoryNotFoundException;
+import com.javaProject.AptitudeApp.exception.GlobalExceptionHandler;
 import com.javaProject.AptitudeApp.service.Impl.HomeService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(HomeController.class)
+@Import(GlobalExceptionHandler.class)
 public class HomeControllerTests {
 
     @Autowired
