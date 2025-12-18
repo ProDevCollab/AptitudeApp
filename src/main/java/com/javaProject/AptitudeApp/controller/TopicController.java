@@ -24,7 +24,7 @@ public class TopicController {
         this.topicService = topicService;
     }
 
-    @GetMapping("/resource")
+    @GetMapping("/resources")
     public ResponseEntity<List<LearningResourceDto>> getLearningResources(@PathVariable String slug) {
         List<LearningResourceDto> learningResources = topicService.getLearningResourcesByTopic(slug);
         return new ResponseEntity<>(learningResources, HttpStatus.OK);
