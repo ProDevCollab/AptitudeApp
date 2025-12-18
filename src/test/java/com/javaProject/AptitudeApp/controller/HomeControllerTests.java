@@ -4,7 +4,7 @@ import com.javaProject.AptitudeApp.dto.CategoryDto;
 import com.javaProject.AptitudeApp.dto.TopicDto;
 import com.javaProject.AptitudeApp.exception.CategoryNotFoundException;
 import com.javaProject.AptitudeApp.exception.GlobalExceptionHandler;
-import com.javaProject.AptitudeApp.service.Impl.HomeService;
+import com.javaProject.AptitudeApp.service.IHomeService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class HomeControllerTests {
     private MockMvc mockMvc;
 
     @MockitoBean
-    private HomeService homeService;
+    private IHomeService homeService;
 
     @Test
     public void testGetAllCategories() throws Exception {
