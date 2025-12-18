@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{slug}/quiz")
+@RequestMapping("/topics/{slug}")
 public class QuizController {
 
     private ISetupQuiz setupQuiz;
@@ -24,7 +24,7 @@ public class QuizController {
         this.setupQuiz = setupQuiz;
     }
 
-    @GetMapping("/")
+    @GetMapping("/quiz")
     public ResponseEntity<List<QuestionDto>> getRandomQuestions(@PathVariable String slug) {
         List<QuestionDto> questionList = setupQuiz.getQuestionForSlug(slug);
         return new ResponseEntity<>(questionList, HttpStatus.OK);

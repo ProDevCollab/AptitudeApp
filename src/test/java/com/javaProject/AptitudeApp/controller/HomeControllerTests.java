@@ -2,6 +2,7 @@ package com.javaProject.AptitudeApp.controller;
 
 import com.javaProject.AptitudeApp.dto.CategoryDto;
 import com.javaProject.AptitudeApp.dto.TopicDto;
+import com.javaProject.AptitudeApp.exception.CategoryNotFoundException;
 import com.javaProject.AptitudeApp.service.Impl.HomeService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -90,7 +91,7 @@ public class HomeControllerTests {
     public void testGetTopicsByCategoryId_InvalidId() throws Exception {
         Long categoryId = 999L;
         Mockito.when(homeService.getTopicsByCategory(categoryId))
-                .thenReturn(List.of());
+                .thenThrow(new CategoryNotFoundException("Category not found with id: " + categoryId));
 
         mockMvc.perform(get("/categories/{categoryId}/topics", categoryId))
                 .andExpect(status().isInternalServerError())

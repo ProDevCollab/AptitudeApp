@@ -4,6 +4,7 @@ import com.javaProject.AptitudeApp.dao.ICategoryRepo;
 import com.javaProject.AptitudeApp.dao.ITopicRepo;
 import com.javaProject.AptitudeApp.dto.CategoryDto;
 import com.javaProject.AptitudeApp.dto.TopicDto;
+import com.javaProject.AptitudeApp.exception.CategoryNotFoundException;
 import com.javaProject.AptitudeApp.model.Category;
 import com.javaProject.AptitudeApp.model.Topic;
 import com.javaProject.AptitudeApp.service.IHomeService;
@@ -37,7 +38,7 @@ public class HomeService implements IHomeService {
     @Override
     public List<TopicDto> getTopicsByCategory(Long categoryId) {
         Category category = categoryRepo.findById(categoryId).orElseThrow(
-                () -> new RuntimeException("Category not found with id: " + categoryId));
+                () -> new CategoryNotFoundException("Category not found with id: " + categoryId));
         List<Topic> allTopics = topicRepo.findByCategory(category);
         return allTopics.stream().map(topic -> new TopicDto(topic.getTopicId(), topic.getTopicName(), topic.getSlug())).toList();
     }
