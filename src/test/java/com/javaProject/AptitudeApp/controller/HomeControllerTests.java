@@ -94,8 +94,10 @@ public class HomeControllerTests {
                 .thenThrow(new CategoryNotFoundException("Category not found with id: " + categoryId));
 
         mockMvc.perform(get("/categories/{categoryId}/topics", categoryId))
-                .andExpect(status().isInternalServerError())
-                .andExpect(content().string(""));
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.statusCode").value(404))
+                .andExpect(jsonPath("$.message").value("Category not found with id: " + categoryId));
     }
 
     @Test
