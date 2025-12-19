@@ -33,19 +33,19 @@ public class AdminController {
         return new ResponseEntity<>(topicDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("/topic/add")
+    @PostMapping("/topic")
     public ResponseEntity<String> addTopic(@RequestBody TopicCreationDto topicCreationDto) {
         String responseText =  adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId(), topicCreationDto.getSlug());
         return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
-    @PostMapping("/learning-resource/add")
+    @PostMapping("/learning-resource")
     public ResponseEntity<String> addLearningResource(@RequestBody LearningResourceCreationDto learningResourceCreationDto) {
         String responseText = adminService.addLearningResource(learningResourceCreationDto.getResourceUrl(), learningResourceCreationDto.getTopicId());
         return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
-    @PostMapping("/question/add")
+    @PostMapping("/question")
     public ResponseEntity<String> addQuestion(@RequestBody QuestionCreationDto questionCreationDto) {
         String responseText = adminService.addQuestion(
                 questionCreationDto.getQuestion(),
