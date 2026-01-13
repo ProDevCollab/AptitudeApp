@@ -1,13 +1,37 @@
 package com.javaProject.AptitudeApp.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class QuestionCreationDto {
+    @NotBlank(message = "Question is required")
     private String question;
-    private String imageData; 
+
+    @Pattern(
+            regexp = "^data:image\\/[a-z]{3,5};base64,(.*)$",
+            message = "Image is corrupted, try another image"
+    )
+    private String imageData;
+
+    @NotBlank(message = "Option A is required")
     private String opA;
+
+    @NotBlank(message = "Option B is required")
     private String opB;
+
+    @NotBlank(message = "Option C is required")
     private String opC;
+
+    @NotBlank(message = "Option D is required")
     private String opD;
+
+    @NotBlank(message = "Answer is required")
+    @Pattern(
+            regexp = "^[a-dA-D]$",
+            message = "Answer should be A-D or a-d"
+    )
     private String answer;
+
     private final Long topicId;
 
     //from frontend image is encoded to String and in backend image is coverted from String to Byte Array and then decoded back to it's original format and is stored file storage

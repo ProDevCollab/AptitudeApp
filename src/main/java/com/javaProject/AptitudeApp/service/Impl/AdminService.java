@@ -82,7 +82,7 @@ public class AdminService implements IAdminService {
     	String imageUrl = null;
     	try {
             if (!imageData.isEmpty()) {
-                byte[] imageBytes = Base64.getDecoder().decode(imageData);
+                byte[] imageBytes = Base64.getDecoder().decode(imageData.split("data:image\\/[a-z]+;base64,")[1]);
 
                 //filename = {QI}-{topicId}-{dateTime}
                 String filename = "QI-" + topic.getTopicId() + "-" + LocalDateTime.now();
@@ -104,6 +104,7 @@ public class AdminService implements IAdminService {
             }
             } catch(IllegalArgumentException e){
                 System.err.println("Error decoding Base64 string: " + e.getMessage());
+                throw new RuntimeException("Image data is corrupted");
             }
 
 

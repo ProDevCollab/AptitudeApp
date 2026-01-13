@@ -2,6 +2,7 @@ package com.javaProject.AptitudeApp.controller;
 
 import com.javaProject.AptitudeApp.dto.*;
 import com.javaProject.AptitudeApp.service.IAdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,19 +35,19 @@ public class AdminController {
     }
 
     @PostMapping("/topic")
-    public ResponseEntity<String> addTopic(@RequestBody TopicCreationDto topicCreationDto) {
+    public ResponseEntity<String> addTopic(@Valid @RequestBody TopicCreationDto topicCreationDto) {
         String responseText =  adminService.addTopic(topicCreationDto.getTopicName(), topicCreationDto.getCategoryId(), topicCreationDto.getSlug());
         return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
     @PostMapping("/learning-resource")
-    public ResponseEntity<String> addLearningResource(@RequestBody LearningResourceCreationDto learningResourceCreationDto) {
+    public ResponseEntity<String> addLearningResource(@Valid @RequestBody LearningResourceCreationDto learningResourceCreationDto) {
         String responseText = adminService.addLearningResource(learningResourceCreationDto.getResourceUrl(), learningResourceCreationDto.getTopicId());
         return new ResponseEntity<>(responseText, HttpStatus.CREATED);
     }
 
     @PostMapping("/question")
-    public ResponseEntity<String> addQuestion(@RequestBody QuestionCreationDto questionCreationDto) {
+    public ResponseEntity<String> addQuestion(@Valid @RequestBody QuestionCreationDto questionCreationDto) {
         String responseText = adminService.addQuestion(
                 questionCreationDto.getQuestion(),
                 questionCreationDto.getImageData(),
